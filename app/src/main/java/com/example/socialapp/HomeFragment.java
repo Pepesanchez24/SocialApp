@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment {
 
         navController = Navigation.findNavController(view);
         RecyclerView postsRecyclerView = view.findViewById(R.id.postsRecyclerView);
-        adapter = new PostsAdapter();
+        adapter = new PostsAdapter(this);
         postsRecyclerView.setAdapter(adapter);
 
         view.findViewById(R.id.gotoNewPostFragmentButton).setOnClickListener(v ->
@@ -106,6 +106,11 @@ public class HomeFragment extends Fragment {
 
     class PostsAdapter extends RecyclerView.Adapter<PostViewHolder> {
         DocumentList<Map<String, Object>> lista = null;
+        private final HomeFragment homeFragment;
+
+        public PostsAdapter(HomeFragment homeFragment) {
+            this.homeFragment = homeFragment;
+        }
 
         @Override
         public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -122,20 +127,20 @@ public class HomeFragment extends Fragment {
             List<String> likes = (List<String>) post.get("likes");
             holder.likeImageView.setImageResource(likes.contains(userId) ? R.drawable.like_on : R.drawable.like_off);
             holder.numLikesTextView.setText(String.valueOf(likes.size()));
-            holder.likeImageView.setOnClickListener(view -> actualizarLikes(post, likes));
+
+            holder.likeImageView.setOnClickListener(view -> homeFragment.actualizarLikes(post, likes));
 
             List<String> tags = (List<String>) post.get("tags");
             if (tags != null && !tags.isEmpty()) {
                 holder.tagsTextView.setText("#" + String.join(" #", tags));
                 holder.tagsTextView.setVisibility(View.VISIBLE);
-                holder.tagsTextView.setOnClickListener(view -> filtrarPorEtiqueta(tags.get(0)));
             } else {
                 holder.tagsTextView.setVisibility(View.GONE);
             }
 
             if (post.get("authorId").toString().equals(userId)) {
                 holder.deleteImageView.setVisibility(View.VISIBLE);
-                holder.deleteImageView.setOnClickListener(view -> eliminarPost(post.get("$id").toString()));
+                holder.deleteImageView.setOnClickListener(view -> homeFragment.eliminarPost(post.get("$id").toString()));
             } else {
                 holder.deleteImageView.setVisibility(View.GONE);
             }
@@ -200,9 +205,5 @@ public class HomeFragment extends Fragment {
                 Snackbar.make(requireView(), "Post eliminado", Snackbar.LENGTH_SHORT).show();
             });
         }));
-    }
-
-    void filtrarPorEtiqueta(String tag) {
-        // Lógica para filtrar posts con la etiqueta especificada
     }
 }
