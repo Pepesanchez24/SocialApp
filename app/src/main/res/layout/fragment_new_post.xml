@@ -41,20 +41,24 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_marginLeft="8dp"
-                    android:background="@drawable/image" />
+                    android:background="@drawable/image"
+                    android:contentDescription="Abrir cámara"/>
                 <Button
                     android:id="@+id/video_galeria"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_marginLeft="8dp"
-                    android:background="@drawable/movie" />
+                    android:background="@drawable/movie"
+                    android:contentDescription="Abrir cámara"/>
                 <Button
                     android:id="@+id/audio_galeria"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_marginLeft="8dp"
-                    android:background="@drawable/audio"/>
+                    android:background="@drawable/audio"
+                    android:contentDescription="Abrir galeria" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,19 +68,22 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_marginLeft="8dp"
-                    android:background="@drawable/camera" />
+                    android:background="@drawable/camera"
+                    android:contentDescription="Abrir cámara" />
                 <Button
                     android:id="@+id/camara_video"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_marginLeft="8dp"
-                    android:background="@drawable/video" />
+                    android:background="@drawable/video"
+                    android:contentDescription="Abrir cámara"/>
                 <Button
                     android:id="@+id/grabar_audio"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_marginLeft="8dp"
-                    android:background="@drawable/mic" />
+                    android:background="@drawable/mic"
+                    android:contentDescription="Abrir audio"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
